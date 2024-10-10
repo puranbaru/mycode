@@ -1,0 +1,16 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/puranbaru/Documents/Programming/C_Programs/project-2-linux-shell-kribaru-main/shell_1002'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _parse, symObjAddr: 0x0, symBinAddr: 0x10000315C, symSize: 0x124 }
+  - { offsetInCU: 0x4B, offset: 0x4B, size: 0x8, addend: 0x0, symName: _parse, symObjAddr: 0x0, symBinAddr: 0x10000315C, symSize: 0x124 }
+  - { offsetInCU: 0xAB, offset: 0xAB, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x124, symBinAddr: 0x100003280, symSize: 0x218 }
+  - { offsetInCU: 0x153, offset: 0x153, size: 0x8, addend: 0x0, symName: _execute_piped_commands, symObjAddr: 0x33C, symBinAddr: 0x100003498, symSize: 0x180 }
+  - { offsetInCU: 0x1CC, offset: 0x1CC, size: 0x8, addend: 0x0, symName: _parse_command, symObjAddr: 0x4BC, symBinAddr: 0x100003618, symSize: 0x16C }
+  - { offsetInCU: 0x236, offset: 0x236, size: 0x8, addend: 0x0, symName: _shell_cd, symObjAddr: 0x628, symBinAddr: 0x100003784, symSize: 0x78 }
+  - { offsetInCU: 0x25A, offset: 0x25A, size: 0x8, addend: 0x0, symName: _execute_command, symObjAddr: 0x6A0, symBinAddr: 0x1000037FC, symSize: 0x1C4 }
+  - { offsetInCU: 0x318, offset: 0x318, size: 0x8, addend: 0x0, symName: _resolve_path, symObjAddr: 0x864, symBinAddr: 0x1000039C0, symSize: 0x160 }
+  - { offsetInCU: 0x379, offset: 0x379, size: 0x8, addend: 0x0, symName: _shell_help, symObjAddr: 0x9C4, symBinAddr: 0x100003B20, symSize: 0x58 }
+  - { offsetInCU: 0x38E, offset: 0x38E, size: 0x8, addend: 0x0, symName: _shell_exit, symObjAddr: 0xA1C, symBinAddr: 0x100003B78, symSize: 0x1C }
+  - { offsetInCU: 0x3A3, offset: 0x3A3, size: 0x8, addend: 0x0, symName: _shell_pwd, symObjAddr: 0xA38, symBinAddr: 0x100003B94, symSize: 0x9C }
+...

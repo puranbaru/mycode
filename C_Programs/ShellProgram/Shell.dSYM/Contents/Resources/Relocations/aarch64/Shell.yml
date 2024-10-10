@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/puranbaru/Documents/Programming/C_Programs/ShellProgram/Shell'
+relocations:     []
+...
