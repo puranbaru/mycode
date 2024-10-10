@@ -1,0 +1,63 @@
+main(){
+    print("What do you want to call"); // "prompt" user to input command
+    while (not ^c){
+        // read user input into char cmd (then clean it up)
+        
+        // tokenize cmd, store tokens in args[]
+
+        if (cmd is help){
+            call help();
+        } else if (cmd is pwd){
+            call pwd();
+        } else if (cmd is cd){
+            call cd();
+        } else if (cmd is exit){
+            call exit();
+        } else {
+            // incorporate resolve_path
+            // cmd is not a built-in command
+
+            new process = fork() process
+            if (new_process == 0){
+                // execute external command w/ execv
+            }
+            else {
+                print error;
+                exit;
+
+
+        }
+    }
+}
+
+help(){
+   // print available commands
+   print(pwd)
+   print(cd)
+   print(help)
+   print(exit)
+}
+
+pwd(){
+    // use getcwd
+    // fetch current working directory
+    // print to screen
+    // if it doesn't work, print an error msg
+}
+
+cd(directory path){
+    // use chdir
+    chdir(path)
+    // if no directory argument, say that it requires a directory
+}
+
+exit(){
+    print("exiting shell);
+    exit(0);
+}
+
+resolve_path(cmd){
+    // get path environment variable
+
+    // tokenize path (using colon?)
+}

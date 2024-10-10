@@ -1,0 +1,98 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "CheatersHangman",
+            "request": "launch",
+            "mainClass": "CheatingComputers.CheatersHangman",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "CircularLinkedList",
+            "request": "launch",
+            "mainClass": "CircularLinkedList",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "DisasterPlanner",
+            "request": "launch",
+            "mainClass": "DisasterPlanner.DisasterPlanner",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "DoctorPatientScheduler",
+            "request": "launch",
+            "mainClass": "DoctorPatientScheduler.DoctorPatientScheduler",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "Maze",
+            "request": "launch",
+            "mainClass": "Maze",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "NQueens",
+            "request": "launch",
+            "mainClass": "NQueens.NQueens",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "SortingAlgorithms",
+            "request": "launch",
+            "mainClass": "SortingAlgorithms",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "SortingData",
+            "request": "launch",
+            "mainClass": "SortingData",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "SortingDataSample",
+            "request": "launch",
+            "mainClass": "SortingDataSample",
+            "projectName": "Java_1f6995d8"
+        },
+        {
+            "type": "java",
+            "name": "SpecialityDocPatientScheduler",
+            "request": "launch",
+            "mainClass": "SpecialityDocPatientScheduler.SpecialityDocPatientScheduler",
+            "projectName": "Java_1f6995d8"
+        }
+    ]
+}

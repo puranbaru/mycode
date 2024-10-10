@@ -1,0 +1,12 @@
+Patient Lacks: 2: General
+Patient Gage: 3: General
+Patient Molaison: 4: ENT
+Patient Writebol: 3: ENT
+Patient St. Martin: 1: Neuro
+Patient Washkansky: 6: Neuro
+Patient Sandoval: 8: General
+Patient Giese: 6: General
+Doctor Thomas: 10: General
+Doctor Taussig: 8: ENT
+Doctor Sacks: 8: Neuro
+Doctor Ofri: 8: General

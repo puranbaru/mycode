@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/puranbaru/Documents/Programming/C_Programs/Lab6c/Race2'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000039CC, symSize: 0x120 }
+  - { offsetInCU: 0x48, offset: 0x48, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000039CC, symSize: 0x120 }
+  - { offsetInCU: 0x7E, offset: 0x7E, size: 0x8, addend: 0x0, symName: _hareMove, symObjAddr: 0x120, symBinAddr: 0x100003AEC, symSize: 0x138 }
+  - { offsetInCU: 0xB0, offset: 0xB0, size: 0x8, addend: 0x0, symName: _tortMove, symObjAddr: 0x258, symBinAddr: 0x100003C24, symSize: 0xDC }
+  - { offsetInCU: 0xE2, offset: 0xE2, size: 0x8, addend: 0x0, symName: _printRace, symObjAddr: 0x334, symBinAddr: 0x100003D00, symSize: 0x108 }
+  - { offsetInCU: 0x122, offset: 0x122, size: 0x8, addend: 0x0, symName: _printWinner, symObjAddr: 0x43C, symBinAddr: 0x100003E08, symSize: 0x58 }
+  - { offsetInCU: 0x154, offset: 0x154, size: 0x8, addend: 0x0, symName: _min, symObjAddr: 0x494, symBinAddr: 0x100003E60, symSize: 0x48 }
+  - { offsetInCU: 0x18A, offset: 0x18A, size: 0x8, addend: 0x0, symName: _randomNumberGenerator, symObjAddr: 0x4DC, symBinAddr: 0x100003EA8, symSize: 0x28 }
+...

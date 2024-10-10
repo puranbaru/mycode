@@ -1,0 +1,330 @@
+package CheatingComputers;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
+//import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+
+public class CheatersHangman {
+
+    public static void main(String[] args) {
+        Set<String> dictionary = readDictionary("/Users/puranbaru/Documents/Programming/Java/CheatingComputers/dictionary.txt");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to Cheater's Hangman!");
+        int wordLength = getWordLength(scanner, dictionary);
+        int maxWrongGuesses = getMaxWrongGuesses(scanner);
+
+         // Filter the dictionary to only include words of the chosen word length
+        Set<String> filteredDictionary = filterWordsByLength(dictionary, wordLength);
+
+        Set<Set<String>> hiddenWords = createHiddenWords(dictionary, wordLength);
+        Set<Character> guessedLetters = new HashSet<>();
+        int wrongGuesses = 0;
+
+        while (wrongGuesses < maxWrongGuesses && !hiddenWords.isEmpty()) {
+            displayGameState(hiddenWords, guessedLetters, maxWrongGuesses - wrongGuesses);
+            char guess = getValidGuess(scanner, guessedLetters);
+
+            Set<Set<String>> wordFamilies = groupWordsByPattern(hiddenWords, guess);
+            hiddenWords = chooseWordFamily(wordFamilies);
+
+            if (!wordContainsLetter(hiddenWords, guess)) {
+                wrongGuesses++;
+            }
+
+            guessedLetters.add(guess);
+            if (wrongGuesses >= maxWrongGuesses) {
+                displayGameResult(hiddenWords, maxWrongGuesses - wrongGuesses);
+                break; // Exit the loop as the player has lost
+            }
+        }
+
+        displayGameResult(hiddenWords, maxWrongGuesses - wrongGuesses);
+        scanner.close();
+    }
+
+    // Helper methods (implement these)
+
+  
+
+    private static Set<String> filterWordsByLength(Set<String> dictionary, int wordLength) {
+        Set<String> filteredWords = new HashSet<>();
+        for (String word : dictionary) {
+            if (word.length() == wordLength) {
+                filteredWords.add(word);
+            }
+        }
+        return filteredWords;
+    }
+
+    
+    private static Set<String> readDictionary(String filename) {
+        Set<String> dictionary = new HashSet<>();
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim().toLowerCase(); // Normalize the word (e.g., convert to lowercase)
+                if (line.length() > 0) {
+                    dictionary.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+        return dictionary;
+    }
+    
+
+    private static int getWordLength(Scanner scanner, Set<String> dictionary) {
+        int wordLength = 0;
+    
+        while (true) {
+            System.out.print("Enter the word length: ");
+            if (scanner.hasNextInt()) {
+                wordLength = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                if (wordLength <= 0) {
+                    System.out.println("Word length must be greater than 0.");
+                } else if (!hasWordsWithLength(dictionary, wordLength)) {
+                    System.out.println("No words of that length in the dictionary.");
+                } else {
+                    break; // Valid word length
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a positive integer.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+    
+        return wordLength;
+    }
+    
+    private static boolean hasWordsWithLength(Set<String> dictionary, int length) {
+        for (String word : dictionary) {
+            if (word.length() == length) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+
+    private static int getMaxWrongGuesses(Scanner scanner) {
+        int maxGuesses = 0;
+    
+        while (true) {
+            System.out.print("Enter the maximum wrong guesses allowed: ");
+            if (scanner.hasNextInt()) {
+                maxGuesses = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                if (maxGuesses < 1) {
+                    System.out.println("Maximum wrong guesses must be at least 1.");
+                } else {
+                    break; // Valid input
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a positive integer.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+    
+        return maxGuesses;
+    }
+    
+    private static Set<Set<String>> createHiddenWords(Set<String> dictionary, int wordLength) {
+        Set<Set<String>> hiddenWordSets = new HashSet<>();
+    
+        for (int i = 1; i <= wordLength; i++) {
+            Set<String> hiddenWords = new HashSet<>();
+            for (String word : dictionary) {
+                if (word.length() == i) {
+                    hiddenWords.add(word);
+                }
+            }
+            hiddenWordSets.add(hiddenWords);
+        }
+    
+        return hiddenWordSets;
+    }
+    
+    
+    
+    // private static Set<String> createHiddenWords(Set<String> dictionary, int wordLength) {
+    //     Set<String> hiddenWords = new HashSet<>();
+    
+    //     for (String word : dictionary) {
+    //         if (word.length() == wordLength) {
+    //             hiddenWords.add(word);
+    //         }
+    //     }
+    
+    //     return hiddenWords;
+    // }
+    
+
+    private static void displayGameState(Set<Set<String>> hiddenWords, Set<Character> guessedLetters, int remainingGuesses) {
+        System.out.println("Revealed Letters: " + getRevealedLetters(hiddenWords));
+        System.out.println("Guessed Letters: " + guessedLetters);
+        System.out.println("Remaining Guesses: " + remainingGuesses);
+    }
+    
+    private static String getRevealedLetters(Set<Set<String>> hiddenWords) {
+        StringBuilder revealed = new StringBuilder();
+    
+        for (Set<String> word : hiddenWords) {
+            for (int i = 0; i < ((CharSequence) word).length(); i++) {
+                char letter = ((CharSequence) word).charAt(i);
+                if (Character.isLetter(letter)) {
+                    revealed.append(letter);
+                } else {
+                    revealed.append("_");
+                }
+            }
+        }
+    
+        return revealed.toString();
+    }
+    
+
+
+    private static char getValidGuess(Scanner scanner, Set<Character> guessedLetters) {
+        char guess = ' ';
+        boolean validGuess = false;
+    
+        do {
+            System.out.print("Enter your guess: ");
+            String input = scanner.nextLine().toLowerCase(); // Change from next() to nextLine()
+    
+            if (input.length() != 1) {
+                System.out.println("Please enter a single letter.");
+            } else {
+                guess = input.charAt(0);
+    
+                if (!Character.isLetter(guess)) {
+                    System.out.println("Please enter a valid letter.");
+                } else if (guessedLetters.contains(guess)) {
+                    System.out.println("You've already guessed that letter. Try a different one.");
+                } else {
+                    guessedLetters.add(guess);
+                    validGuess = true;
+                }
+            }
+        } while (!validGuess);
+    
+        return guess;
+    }
+    
+    // private static char getValidGuess(Scanner scanner, Set<Character> guessedLetters) {
+    //     char guess = ' ';
+    //     boolean validGuess = false;
+    
+    //     do {
+    //         System.out.print("Enter your guess: ");
+    //         String input = scanner.next().toLowerCase(); // Convert the input to lowercase
+    
+    //         if (input.length() != 1) {
+    //             System.out.println("Please enter a single letter.");
+    //         } else {
+    //             guess = input.charAt(0);
+    
+    //             if (!Character.isLetter(guess)) {
+    //                 System.out.println("Please enter a valid letter.");
+    //             } else if (guessedLetters.contains(guess)) {
+    //                 System.out.println("You've already guessed that letter. Try a different one.");
+    //             } else {
+    //                 guessedLetters.add(guess);
+    //                 validGuess = true;
+    //             }
+    //         }
+    //     } while (!validGuess);
+    
+    //     return guess;
+    // }
+    
+
+    private static Set<Set<String>> groupWordsByPattern(Set<Set<String>> hiddenWords, char guess) {
+        Set<Set<String>> wordFamilies = new HashSet<>();
+    
+        // Create a pattern for the guess
+        String pattern = createPattern(hiddenWords.iterator().next(), guess);
+    
+        for (Set<String> word : hiddenWords) {
+            boolean addedToFamily = false;
+    
+            for (Set<String> family : wordFamilies) {
+                String representative = family.iterator().next();
+                String wordPattern = createPattern(representative, guess);
+    
+                if (wordPattern.equals(pattern)) {
+                    family.add(word);
+                    addedToFamily = true;
+                    break;
+                }
+            }
+    
+            if (!addedToFamily) {
+                Set<String> newFamily = new HashSet<>();
+                newFamily.add(word);
+                wordFamilies.add(newFamily);
+            }
+        }
+    
+        return wordFamilies;
+    }
+    
+    private static String createPattern(Set<String> set, char guess) {
+        StringBuilder pattern = new StringBuilder();
+        for (char letter : set.toCharArray()) {
+            if (letter == guess) {
+                pattern.append(guess);
+            } else {
+                pattern.append('_');
+            }
+        }
+        return pattern.toString();
+    }
+    
+
+    private static Set<String> chooseWordFamily(Set<Set<String>> wordFamilies) {
+        // Strategy: Choose the largest word family
+        Set<String> largestFamily = null;
+        int maxSize = 0;
+    
+        for (Set<String> family : wordFamilies) {
+            if (family.size() > maxSize) {
+                largestFamily = family;
+                maxSize = family.size();
+            }
+        }
+    
+        return largestFamily;
+    }
+    
+
+    private static boolean wordContainsLetter(Set<Set<String>> hiddenWords, char letter) {
+        for (String word : hiddenWords) {
+            if (word.indexOf(letter) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+
+    private static void displayGameResult(Set<Set<String>> hiddenWords, int remainingGuesses) {
+        if (hiddenWords.isEmpty()) {
+            System.out.println("Congratulations! You've won the game.");
+        } else if (remainingGuesses == 0) {
+            System.out.println("Sorry, you've run out of guesses. You lose!");
+            System.out.println("The hidden word was: " + hiddenWords.iterator().next());
+        }
+    }
+    
+}
+

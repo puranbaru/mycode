@@ -1,0 +1,12 @@
+Sea: But, Port: But
+But: Sea, SLC: But
+Port: Sea, SLC, Sac:Sac
+Sac: SF, SLC, LA: Sac
+SLC: But, Port, Sac: Sac, But
+Mon: SLC, LV: LV
+LV: Mon, Bar: LV, Bar
+Bar: LV, LA, Flag: LV, Bar
+Flag: Bar, Phoe: Bar
+Phoe: Flag, LA, Nog: Nog
+Nog: Phoe, SD: Nog
+SD: LA, Nog: Nog

@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+void print_arr(int arr[], int len);
+void bubble_sort(int arr[], int len);
+
+
+void print_arr(int arr[5], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+
+void bubble_sort(int arr[], int len)
+{
+    for (int j = 0; j < len - 1; j++)
+    {
+        print_arr(arr, len);
+        printf("\n");
+        for(int i = 0; i < len; i++)
+        {
+            if (arr[i] < arr[i+1]) 
+            {
+                int temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+            }
+        }
+    }
+    // print_arr(arr, len);
+}
+
+
+void binary_search(int arr[], int len, int key)
+{
+    int left = 0;
+    int right = len - 1;
+    
+    while (l <= r)
+    {
+        mid = (left + right) / 2;
+        
+        if (arr[mid] > key)
+        {
+            l = mid +1;
+        }
+        
+        
+        if (arr[mid] == key)
+            return mid;
+    }
+    
+    return -1;
+    
+}
+
+
+int main() 
+{
+    int arr[5] = {3, 5, 2, 1, 4};
+    
+    bubble_sort(arr, 5);
+    
+    int index = binary_search(arr, )
+    
+    return 0;
+}
